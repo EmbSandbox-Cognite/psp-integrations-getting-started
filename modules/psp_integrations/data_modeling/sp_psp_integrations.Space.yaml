@@ -1,0 +1,3 @@
+space: {{ space }}
+name: PSP Getting Started with Integrations
+description: Holds the CogniteAsset and CogniteTimeSeries instances built from the pump feed.

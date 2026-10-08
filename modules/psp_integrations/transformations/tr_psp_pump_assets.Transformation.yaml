@@ -1,0 +1,15 @@
+externalId: tr_psp_pump_assets
+name: PSP pump assets
+ignoreNullFields: true
+conflictMode: upsert
+isPublic: true
+destination:
+  type: nodes
+  view:
+    space: cdf_cdm
+    externalId: CogniteAsset
+    version: v1
+  instanceSpace: {{ space }}
+authentication:
+  clientId: {{ clientId }}
+  clientSecret: {{ clientSecret }}

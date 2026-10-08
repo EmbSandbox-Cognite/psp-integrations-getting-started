@@ -1,0 +1,10 @@
+externalId: loc_psp_integrations
+name: Pump House
+description: Pump assets and time series built from the psp_pump_feed integration.
+dataModels:
+  - space: cdf_cdm
+    externalId: CogniteCore
+    version: v1
+instanceSpaces:
+  - {{ space }}
+dataModelingType: DATA_MODELING_ONLY

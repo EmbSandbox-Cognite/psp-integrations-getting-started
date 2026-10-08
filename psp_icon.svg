@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" role="img" aria-label="Getting Started with Integrations">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1F2A44"/>
+      <stop offset="1" stop-color="#0F1730"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background tile (do not change) -->
+  <rect width="256" height="256" rx="48" fill="url(#bg)"/>
+
+  <!-- Motif: batches of data funnelling into a monitored feed -->
+  <rect x="56" y="48" width="144" height="18" rx="8" fill="#4A7BF7" opacity="0.5"/>
+  <rect x="72" y="78" width="112" height="18" rx="8" fill="#4A7BF7" opacity="0.75"/>
+  <rect x="88" y="108" width="80" height="18" rx="8" fill="#4A7BF7"/>
+
+  <!-- Monitoring pulse: the live feed being watched -->
+  <path d="M48 170 h36 l14 -32 l18 60 l14 -44 l12 16 h66"
+        fill="none" stroke="#7FD1B9" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

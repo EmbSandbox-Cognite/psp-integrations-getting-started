@@ -1,0 +1,20 @@
+# Tells the extractor which CDF project and integration to talk to.
+#
+# There are no secrets in this file: every value below comes from an environment variable, and
+# run-extractor.ps1 loads those from your .env file before starting the extractor. What the extractor
+# actually does (source file, query, schedule) is not set here - it downloads that from the
+# integration as a configuration revision.
+
+project: ${CDF_PROJECT}
+
+base-url: ${CDF_URL}
+
+integration:
+  external-id: psp_pump_feed
+
+authentication:
+  type: client-credentials
+  client-secret: ${IDP_CLIENT_SECRET}
+  client-id: ${IDP_CLIENT_ID}
+  token-url: ${IDP_TOKEN_URL}
+  scopes: ${CDF_URL}/.default

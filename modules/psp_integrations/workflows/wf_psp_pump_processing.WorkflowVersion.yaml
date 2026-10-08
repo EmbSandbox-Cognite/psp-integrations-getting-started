@@ -1,0 +1,39 @@
+workflowExternalId: {{ workflowExternalId }}
+version: {{ workflowVersion }}
+workflowDefinition:
+  description: Assets first, then time series, then the datapoints that reference them.
+  tasks:
+    - externalId: build_assets
+      type: transformation
+      name: Build pump assets
+      onFailure: abortWorkflow
+      retries: 1
+      timeout: 900
+      parameters:
+        transformation:
+          externalId: tr_psp_pump_assets
+          concurrencyPolicy: waitForCurrent
+    - externalId: build_timeseries
+      type: transformation
+      name: Build pump time series
+      onFailure: abortWorkflow
+      retries: 1
+      timeout: 900
+      dependsOn:
+        - externalId: build_assets
+      parameters:
+        transformation:
+          externalId: tr_psp_pump_timeseries
+          concurrencyPolicy: waitForCurrent
+    - externalId: load_datapoints
+      type: transformation
+      name: Load pump datapoints
+      onFailure: abortWorkflow
+      retries: 0
+      timeout: 900
+      dependsOn:
+        - externalId: build_timeseries
+      parameters:
+        transformation:
+          externalId: tr_psp_pump_datapoints
+          concurrencyPolicy: waitForCurrent

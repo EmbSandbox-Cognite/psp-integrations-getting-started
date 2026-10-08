@@ -1,0 +1,14 @@
+{
+    "name": "Getting Started with Integrations",
+    "description": "End-to-end example of a Cognite Data Fusion Integration: a local DB extractor feeding data continuously, monitored in the Integrations UI, with a workflow transforming the data into the Core Data Model and a Flows app showing stats and error codes.",
+    "type": "bundle",
+    "tags": [
+        "integrations",
+        "extraction",
+        "db-extractor",
+        "monitoring",
+        "workflows",
+        "data-modeling",
+        "flows-app"
+    ]
+}

@@ -1,0 +1,15 @@
+externalId: tr_psp_pump_timeseries
+name: PSP pump time series
+ignoreNullFields: true
+conflictMode: upsert
+isPublic: true
+destination:
+  type: nodes
+  view:
+    space: cdf_cdm
+    externalId: CogniteTimeSeries
+    version: v1
+  instanceSpace: {{ space }}
+authentication:
+  clientId: {{ clientId }}
+  clientSecret: {{ clientSecret }}

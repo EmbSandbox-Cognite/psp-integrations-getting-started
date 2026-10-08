@@ -1,0 +1,24 @@
+environment:
+  name: dev
+  project: ${CDF_PROJECT}
+  validation-type: dev
+  selected:
+    - modules/psp_integrations
+
+variables:
+  modules:
+    psp_integrations:
+      space: sp_psp_integrations
+      rawDatabase: psp_integrations
+      rawTable: pump_readings
+      integrationExternalId: psp_pump_feed
+      workflowExternalId: wf_psp_pump_processing
+      workflowVersion: v1
+      # How long the feed may be silent before the integration is flagged as down.
+      # Kept short so that pausing the notebook shows up quickly in monitoring.
+      allowedNotSeenMinutes: 5
+      # How often the workflow picks up newly staged rows.
+      workflowCron: "*/5 * * * *"
+      # Credentials the transformations run as.
+      clientId: ${IDP_CLIENT_ID}
+      clientSecret: ${IDP_CLIENT_SECRET}

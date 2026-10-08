@@ -1,0 +1,31 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+coverage
+
+# Retained app bundles from `cognite apps deploy` (signed before publish)
+.cognite-bundles
+
+# Local HTTPS certificates from `cognite apps setup-https`
+certificates
+
+# Environment variables
+.env
+.env.local
+
+# Editor directories
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# AI agent skills pulled in by `cognite apps create`. They are generated, not
+# source, and nothing in this sample depends on them. Restore with:
+#   npx @cognite/cli apps skills pull
+.claude/skills
+.agents
+

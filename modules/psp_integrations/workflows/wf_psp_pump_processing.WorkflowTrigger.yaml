@@ -1,0 +1,12 @@
+externalId: {{ workflowExternalId }}_schedule
+workflowExternalId: {{ workflowExternalId }}
+workflowVersion: {{ workflowVersion }}
+# CDF has no trigger that fires on an integration run, so the workflow runs on a
+# schedule. A dataModeling trigger on the ingested instances is the data-driven
+# alternative - see the README.
+triggerRule:
+  triggerType: schedule
+  cronExpression: "{{ workflowCron }}"
+authentication:
+  clientId: {{ clientId }}
+  clientSecret: {{ clientSecret }}

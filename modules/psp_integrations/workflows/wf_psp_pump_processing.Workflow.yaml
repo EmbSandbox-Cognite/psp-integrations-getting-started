@@ -1,0 +1,2 @@
+externalId: {{ workflowExternalId }}
+description: Builds CDM assets, time series and datapoints from the staged pump readings.

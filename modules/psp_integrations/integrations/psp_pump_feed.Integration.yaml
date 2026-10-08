@@ -1,0 +1,26 @@
+externalId: {{ integrationExternalId }}
+name: Pump house feed
+description: Reads pump sensor readings from a local CSV and stages them in CDF RAW.
+extractor:
+  externalId: cognite-db
+documentation: |
+  The source system is a CSV file written by notebooks/integrations_tutorial.ipynb in the
+  psp-integrations-getting-started repository. Use that notebook to start and stop the feed,
+  change its pace, and inject failures.
+
+  Tasks:
+    pump_readings - reads new rows from the CSV and writes them to RAW.
+
+  Deliberate failure modes, both triggered from the notebook:
+    "Inject bad data"   - a reading whose flow_rate is "N/A" instead of a number.
+                          The extractor cannot read the file with it in, so the
+                          pump_readings task fails on every cycle until
+                          "Remove the bad data" takes the reading out again.
+    "Break the config"  - publishes a configuration revision with a required
+                          setting removed. The extractor picks it up at its next
+                          check-in (every 30 seconds), refuses it, reports a
+                          config error and stops until "Repair the config"
+                          publishes a good revision again.
+metadata:
+  source: psp-integrations-getting-started
+allowedNotSeenMinutes: {{ allowedNotSeenMinutes }}

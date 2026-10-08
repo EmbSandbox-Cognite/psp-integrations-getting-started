@@ -1,0 +1,16 @@
+{
+  "name": "Integrations Monitoring",
+  "description": "Stats and error codes for the psp_pump_feed integration",
+  "externalId": "integrations-monitoring",
+  "versionTag": "0.0.6",
+  "infra": "appsApi",
+  "deployments": [
+    {
+      "org": "cdf-sandbox",
+      "project": "cdf-sandbox-controltower",
+      "baseUrl": "https://aw-was-gp-001.cognitedata.com",
+      "deployClientId": "",
+      "deploySecretName": "CDF_SANDBOX_CDF_SANDBOX_CONTROLTOWER_AW_WAS_GP_001"
+    }
+  ]
+}

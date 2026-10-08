@@ -1,0 +1,56 @@
+externalId: {{ integrationExternalId }}
+description: Pump CSV feed - deployed from psp-integrations-getting-started
+# This is the extractor's *application* config, stored in CDF as a configuration
+# revision. The extractor downloads it on startup, so `cdf deploy` is how you change
+# the extractor's behaviour. Every deploy appends a new revision, visible on the
+# integration's Configuration tab.
+#
+# Credentials are NOT here. The extractor reads them from environment variables, which
+# extractor/connection.yaml points at (run-extractor.ps1 loads them from .env).
+#
+# `path` is relative, so run the extractor from the repository root.
+config:
+  extractor:
+    # Without this the extractor runs every query exactly once at startup and
+    # then idles - the per-query `schedule` below is otherwise ignored, logged
+    # as "will be ignored in 'single' run mode". Confirmed against the real
+    # v4.0.0-beta3 binary. This is what makes the feed continuous.
+    mode: continuous
+  # Required for incremental-field below. State only reliably persists within one
+  # continuous-mode process's lifetime - a fresh process invocation re-extracts
+  # everything regardless of this file, confirmed against the real binary - which
+  # is fine, since `extractor: mode: continuous` above means this stays one process.
+  state-store:
+    type: local
+    path: ./extractor/state.json
+  databases:
+    - type: spreadsheet
+      name: pump_source
+      path: ./data/pump_readings.csv
+  queries:
+    - name: pump_readings
+      database: pump_source
+      # {incremental_field}/{start_at} are underscored in the query text even
+      # though the YAML keys below are hyphenated - and {start_at} must NOT be
+      # quoted for a numeric field like reading_id (quoting it, correct for a
+      # timestamp field, breaks type-checking against an int column and fails with
+      # an empty "Database error"). Both confirmed against the real binary.
+      query: >
+        SELECT * FROM pump_readings
+        WHERE {incremental_field} >= {start_at}
+        ORDER BY {incremental_field} ASC
+      incremental-field: reading_id
+      initial-start: "0"
+      primary-key: "{reading_id}"
+      # Required by the extractor's spreadsheet provider for every file type, not
+      # just Excel/ODS as the docs say - confirmed against the real v4.0.0-beta3
+      # binary, which otherwise rejects the config with "Missing 'sheet' parameter".
+      # A CSV has no sheets, so the value itself is not meaningful.
+      sheet: pump_readings
+      schedule:
+        type: interval
+        expression: 15s
+      destination:
+        type: raw
+        database: {{ rawDatabase }}
+        table: {{ rawTable }}

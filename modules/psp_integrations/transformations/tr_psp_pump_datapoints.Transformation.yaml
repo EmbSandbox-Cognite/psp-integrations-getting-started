@@ -1,0 +1,12 @@
+externalId: tr_psp_pump_datapoints
+name: PSP pump datapoints
+# false on purpose: a null value fails the run, with the row and column named,
+# instead of being dropped silently.
+ignoreNullFields: false
+conflictMode: upsert
+isPublic: true
+destination:
+  type: datapoints
+authentication:
+  clientId: {{ clientId }}
+  clientSecret: {{ clientSecret }}

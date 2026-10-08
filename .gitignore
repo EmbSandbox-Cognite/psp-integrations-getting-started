@@ -1,0 +1,38 @@
+# Secrets - never commit these
+.env
+*.env
+!.env.example
+
+# The extractor download (a ~100 MB binary plus Cognite's example configs) and its state
+extractor/*.exe
+extractor/*.zip
+extractor/example-*
+extractor/state.json
+extractor/logs/
+logs/
+
+# Generated feed data
+data/*.csv
+data/last_good_config.yaml
+
+# Toolkit build output
+build/
+
+# Python-generated files
+__pycache__/
+*.py[oc]
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Notebooks
+.ipynb_checkpoints/
+
+# Node / Flows app
+node_modules/
+apps/*/dist/
+apps/*/.cognite/
+*.local
